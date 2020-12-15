@@ -1,4 +1,3 @@
-import request
 import config
 import time
 import logging 
@@ -9,12 +8,40 @@ except Exception, e:
     method = ''
 
 if str(method) == 'conversaoDolar':
-    tempoInicial = time.time()
-    urlDolar = config.SERVER['urlDolar']
-    response = request.get(urlDolar)
-    json = response.json()
-    valorFinal = json['bid']
-    tempoFinal = time.time() 
-    duarcaoTotal = tempoFinal- tempoInicial
-    logging.info('Tempo total gasto {duracaoTotal}'.format())
-    print valorFinal
+    try:
+        initialTime = time.time()
+        urlDolar = config.SERVER['urlDolar']
+        economiaAPI = EconomiaAPI(urlDolar)
+        result = economiaAPI.olharCotacaoMoeda()
+        endTime = time.time() 
+        duarcaoTotal = endTime - initialTime
+        logging.info('Tempo total gasto {duracaoTotal}'.format())
+    except Exception, e:
+        result =  '0-0'
+    print result
+
+if str(method) == 'conversaoEuro':
+    try:
+        initialTime = time.time()
+        urlEuro = config.SERVER['urlEuro']
+        economiaAPI = EconomiaAPI(urlEuro)
+        result = economiaAPI.olharCotacaoMoeda()
+        endTime = time.time() 
+        duracaoTotal = endTime - initialTime
+        logging.info('Tempo total gasto {duracaoTotal}'.format())
+    except Exception, e:
+        result = '0-0'
+    print result
+
+if str(metthod) == 'conversaoLibra':
+    try:
+        initialTime = time.time()
+        urlLibra = config.SERVER['urlLibra']
+        economiaAPI = EconomiaAPI(urlLibra)
+        result = economiaAPI.olharCotacaoMoeda()
+        endTime = time.time()
+        duracaoTotal = endTime - initialTime
+        logging.info('Tempo total gasto {duracaoTotal}'.format())
+    except Exception, e:
+        result = '0-0'
+    return result
