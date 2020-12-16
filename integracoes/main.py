@@ -7,12 +7,12 @@ try:
 except Exception, e:
     method = ''
 
-if str(method) == 'conversaoDolar':
+if str(method) == 'conversaoDolarParteInteira':
     try:
         initialTime = time.time()
-        urlDolar = config.SERVER['urlDolar']
+        urlDolar = config.server['urlDolar']
         economiaAPI = EconomiaAPI(urlDolar)
-        result = economiaAPI.olharCotacaoMoeda()
+        result = economiaAPI.olharCotacaoMoedaParteInteira()
         endTime = time.time() 
         duarcaoTotal = endTime - initialTime
         logging.info('Tempo total gasto {duracaoTotal}'.format())
@@ -20,12 +20,25 @@ if str(method) == 'conversaoDolar':
         result =  '0-0'
     print result
 
-if str(method) == 'conversaoEuro':
+if str(method) == 'conversaoDolarParteFracionada':
     try:
         initialTime = time.time()
-        urlEuro = config.SERVER['urlEuro']
+        urlDolar = config.server['urlDolar']
+        economiaAPI = EconomiaAPI(urlDolar)
+        result = economiaAPI.olharCotacaoMoedaParteFracionada()
+        endTime = time.time() 
+        duarcaoTotal = endTime - initialTime
+        logging.info('Tempo total gasto {duracaoTotal}'.format())
+    except Exception, e:
+        result =  '0-0'
+    print result
+
+if str(method) == 'conversaoEuroParteInteira':
+    try:
+        initialTime = time.time()
+        urlEuro = config.server['urlEuro']
         economiaAPI = EconomiaAPI(urlEuro)
-        result = economiaAPI.olharCotacaoMoeda()
+        result = economiaAPI.olharCotacaoMoedaParteInteira()
         endTime = time.time() 
         duracaoTotal = endTime - initialTime
         logging.info('Tempo total gasto {duracaoTotal}'.format())
@@ -33,12 +46,38 @@ if str(method) == 'conversaoEuro':
         result = '0-0'
     print result
 
-if str(metthod) == 'conversaoLibra':
+if str(method) == 'conversaoEuroParteFracionada':
     try:
         initialTime = time.time()
-        urlLibra = config.SERVER['urlLibra']
+        urlEuro = config.server['urlEuro']
+        economiaAPI = EconomiaAPI(urlEuro)
+        result = economiaAPI.olharCotacaoMoedaParteFracionada()
+        endTime = time.time() 
+        duracaoTotal = endTime - initialTime
+        logging.info('Tempo total gasto {duracaoTotal}'.format())
+    except Exception, e:
+        result = '0-0'
+    print result
+
+if str(metthod) == 'conversaoLibraParteInteira':
+    try:
+        initialTime = time.time()
+        urlLibra = config.server['urlLibra']
         economiaAPI = EconomiaAPI(urlLibra)
-        result = economiaAPI.olharCotacaoMoeda()
+        result = economiaAPI.olharCotacaoMoedaParteInteira()
+        endTime = time.time()
+        duracaoTotal = endTime - initialTime
+        logging.info('Tempo total gasto {duracaoTotal}'.format())
+    except Exception, e:
+        result = '0-0'
+    return result
+
+if str(metthod) == 'conversaoLibraParteFracionada':
+    try:
+        initialTime = time.time()
+        urlLibra = config.server['urlLibra']
+        economiaAPI = EconomiaAPI(urlLibra)
+        result = economiaAPI.olharCotacaoMoedaParteFracionada()
         endTime = time.time()
         duracaoTotal = endTime - initialTime
         logging.info('Tempo total gasto {duracaoTotal}'.format())
